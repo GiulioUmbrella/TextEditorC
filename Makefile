@@ -17,6 +17,7 @@ $(BINARY): $(OBJECTS)
 	@echo compile $^ into $@ 
 	$(CC) -o $@ $^
 
+
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
 	@echo compile $< into $@ 
 	$(CC) $(FLAGS) -c -o $@ $<
@@ -25,6 +26,9 @@ $(BUILD_DIR):
 	mkdir -p $@
 
 -include $(DEPS)
+
+demo: $(SRC_DIR)/main.c $(SRC_DIR)/terminal.c
+	$(CC)  -DEDITOR_DEMO -I$(HEADERS_DIR)  $(SRC_DIR)/main.c $(SRC_DIR)/terminal.c -o demo
 
 clean:
 	rm -rf $(BINARY) $(OBJECTS) $(DEPS)
