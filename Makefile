@@ -1,12 +1,13 @@
 SRC_DIR=src
 BUILD_DIR=build
+HEADERS_DIR=include
 
 CC=gcc
-FLAGS=-g -O0 -Wall -Wextra -MMD -MP
+FLAGS=-g -O0 -Wall -Wextra -I$(HEADERS_DIR)   -MMD -MP
 
 SOURCES=$(wildcard $(SRC_DIR)/*.c )
 OBJECTS=$(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SOURCES))
-
+DEPS   =$(OBJECTS:.o=.d )
 
 BINARY=kilo
 
@@ -23,6 +24,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir -p $@
 
+-include $(DEPS)
 
 clean:
 	rm -rf $(BINARY) $(OBJECTS) $(DEPS)
