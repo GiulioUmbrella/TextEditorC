@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-
+#define CTRL_KEY(k) ((k) & 0x1f)
 
 #ifdef EDITOR_DEMO
 int main() {
@@ -35,7 +35,7 @@ int main() {
         } else {
         printf("%d ('%c')\r\n", c, c);
         }
-    if (c == 'q') break;
+    if (c == CTRL_KEY('q')  ) break;
   }
 }
 
