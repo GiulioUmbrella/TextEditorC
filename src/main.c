@@ -23,7 +23,8 @@ int main() {
 
 	while (1) {
     editorRefreshScreen();
-    editorProcessKeypress();
+    char c = editorReadKey();
+    editorProcessKeypress(c);
   }
 }
 

@@ -16,9 +16,8 @@ char editorReadKey() {
   return c;
 }
 
-void editorProcessKeypress() {
-    char c;
-    c = editorReadKey();
+void editorProcessKeypress(char c) {
+
     if (iscntrl(c)) {
         printf("%d\r\n", c);
     } else {
