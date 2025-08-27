@@ -1,10 +1,5 @@
 #include "terminal.h"
 
-#include <ctype.h>
-#include "errno.h"
-#include <stdio.h>
-#include <unistd.h>
-
 #ifdef EDITOR_DEMO
 int main() {
   enableRawMode();

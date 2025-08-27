@@ -1,8 +1,13 @@
 #include "terminal.h"
-#include "errno.h"
+
+#include <ctype.h>
+#include <errno.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
+
+
 #define CTRL_KEY(k) ((k) & 0x1f)
 
 static struct termios origin_termios;
