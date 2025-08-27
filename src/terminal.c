@@ -1,14 +1,11 @@
 #include "terminal.h"
 
-#include <ctype.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
 
-
-#define CTRL_KEY(k) ((k) & 0x1f)
 
 static struct termios origin_termios;
 
@@ -43,33 +40,6 @@ void enableRawMode() {
         die("tcsetattr");
     
 }
-char editorReadKey() {
-  int nread;
-  char c = '\0';
-  while ((nread = read(STDIN_FILENO, &c, 1)) != 1) {
-    if (nread == -1 && errno != EAGAIN) die("read");
-  }
-  return c;
-}
-
-void editorProcessKeypress() {
-  char c = editorReadKey();
-  
-    if (iscntrl(c)) {
-        printf("%d\r\n", c);
-    } else {
-        printf("%d ('%c')\r\n", c, c);
-    }
-  
-  
-  switch (c) {
-    case CTRL_KEY('q'):
-      write(STDOUT_FILENO, "\x1b[2J", 4);
-      write(STDOUT_FILENO, "\x1b[H", 3);
-      exit(0);
-      break;
-    }
-  }
   
 void editorRefreshScreen() {
   write(STDOUT_FILENO, "\x1b[2J", 4);
