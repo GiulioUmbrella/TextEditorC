@@ -34,8 +34,19 @@ void editorProcessKeypress(char c) {
       break;
     }
   }
+void editorDrawRows() {
+  for (int y = 0; y < 24; y++)
+  {
+    write(STDOUT_FILENO, "~\r\n", 3);
+  }
+  
+  }
 
 void editorRefreshScreen() {
   modifyScreen(SCR_CLEAN);
+  modifyScreen(SCR_CURSOR_TOP);
+
+  editorDrawRows();
+
   modifyScreen(SCR_CURSOR_TOP);
 }
