@@ -1,4 +1,5 @@
 #include "controller.h"
+#include "terminal.h"
 
 #include <ctype.h>
 #include <stdio.h>
@@ -27,8 +28,8 @@ void editorProcessKeypress(char c) {
   
   switch (c) {
     case CTRL_KEY('q'):
-      write(STDOUT_FILENO, "\x1b[2J", 4);
-      write(STDOUT_FILENO, "\x1b[H", 3);
+      modifyScreen(SCR_CLEAN);
+      modifyScreen(SCR_CURSOR_TOP);
       exit(0);
       break;
     }
