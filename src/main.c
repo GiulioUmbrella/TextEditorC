@@ -5,8 +5,6 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#define CTRL_KEY(k) ((k) & 0x1f)
-
 #ifdef EDITOR_DEMO
 int main() {
   enableRawMode();
