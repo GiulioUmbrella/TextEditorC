@@ -2,3 +2,4 @@
 
 char editorReadKey();
 void editorProcessKeypress(char c);
+void editorRefreshScreen();

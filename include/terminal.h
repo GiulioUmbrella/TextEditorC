@@ -8,6 +8,5 @@ typedef enum {
 void die(const char *s);
 void disableRawMode(void);
 void enableRawMode(void);
-void editorRefreshScreen();
 void modifyScreen(ScreenOp op);
 

@@ -60,7 +60,3 @@ void modifyScreen(ScreenOp op) {
 }
 
   
-void editorRefreshScreen() {
-  modifyScreen(SCR_CLEAN);
-  modifyScreen(SCR_CURSOR_TOP);
-}
