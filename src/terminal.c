@@ -66,5 +66,9 @@ void editorProcessKeypress() {
     case CTRL_KEY('q'):
       exit(0);
       break;
+    }
   }
+  
+void editorRefreshScreen() {
+  write(STDOUT_FILENO, "\x1b[2J", 4);
 }

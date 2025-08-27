@@ -5,3 +5,4 @@ void disableRawMode(void);
 void enableRawMode(void);
 char editorReadKey();
 void editorProcessKeypress();
+void editorRefreshScreen();
