@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <termios.h>
 #include <unistd.h>
+#define CTRL_KEY(k) ((k) & 0x1f)
 
 static struct termios origin_termios;
 
@@ -46,3 +47,19 @@ char editorReadKey() {
   return c;
 }
 
+void editorProcessKeypress() {
+  char c = editorReadKey();
+  
+    if (iscntrl(c)) {
+        printf("%d\r\n", c);
+    } else {
+        printf("%d ('%c')\r\n", c, c);
+    }
+  
+  
+  switch (c) {
+    case CTRL_KEY('q'):
+      exit(0);
+      break;
+  }
+}
