@@ -19,13 +19,6 @@ char editorReadKey() {
 
 void editorProcessKeypress(char c) {
 
-    if (iscntrl(c)) {
-        printf("%d\r\n", c);
-    } else {
-        printf("%d ('%c')\r\n", c, c);
-    }
-  
-  
   switch (c) {
     case CTRL_KEY('q'):
       modifyScreen(SCR_CLEAN);
@@ -34,13 +27,14 @@ void editorProcessKeypress(char c) {
       break;
     }
   }
+
 void editorDrawRows() {
   for (int y = 0; y < 24; y++)
   {
     write(STDOUT_FILENO, "~\r\n", 3);
   }
   
-  }
+}
 
 void editorRefreshScreen() {
   modifyScreen(SCR_CLEAN);
