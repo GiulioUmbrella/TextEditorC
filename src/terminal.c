@@ -12,11 +12,14 @@ void die(const char *s) {
 }
 
 void disableRawMode(void) {
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &origin_termios);
+    if( tcsetattr(STDIN_FILENO, TCSAFLUSH, &origin_termios) == -1)
+        die("tcsetattr");
 }
 
 void enableRawMode() {
-    tcgetattr(STDIN_FILENO, &origin_termios);
+    if(tcgetattr(STDIN_FILENO, &origin_termios) == -1)
+        die("tcgetattr");
+
     atexit(disableRawMode);
 
     struct termios raw = origin_termios;
@@ -30,5 +33,7 @@ void enableRawMode() {
     raw.c_cc[VTIME] = 1;
     #endif
 
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+    if(tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw))
+        die("tcsetattr");
+    
 }
