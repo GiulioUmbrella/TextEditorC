@@ -40,9 +40,27 @@ void enableRawMode() {
         die("tcsetattr");
     
 }
+
+
+
+void modifyScreen(ScreenOp op) {
+  switch (op)
+  {
+  case SCR_CLEAN:
+    write(STDOUT_FILENO, "\x1b[2J", 4);
+    break;
+    
+  case SCR_CURSOR_TOP:
+    write(STDOUT_FILENO, "\x1b[H", 3);
+    break;  
+
+  default:
+    break;
+  }
+}
+
   
 void editorRefreshScreen() {
-  write(STDOUT_FILENO, "\x1b[2J", 4);
-  write(STDOUT_FILENO, "\x1b[H", 3);
-
+  modifyScreen(SCR_CLEAN);
+  modifyScreen(SCR_CURSOR_TOP);
 }
