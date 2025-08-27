@@ -28,8 +28,10 @@ int main() {
   enableRawMode();
 
 	while (1) {
-        char c = '\0';
-        if (read(STDIN_FILENO, &c, 1)  == -1 && errno != EAGAIN) die("read") ;
+        char c;
+        c = editorReadKey();
+        
+        // if (read(STDIN_FILENO, &c, 1)  == -1 && errno != EAGAIN) die("read") ;
         if (iscntrl(c)) {
         printf("%d\r\n", c);
         } else {

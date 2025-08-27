@@ -1,5 +1,5 @@
 #include "terminal.h"
-
+#include "errno.h"
 #include <stdlib.h>
 #include <termios.h>
 #include <unistd.h>
@@ -37,3 +37,12 @@ void enableRawMode() {
         die("tcsetattr");
     
 }
+char editorReadKey() {
+  int nread;
+  char c = '\0';
+  while ((nread = read(STDIN_FILENO, &c, 1)) != 1) {
+    if (nread == -1 && errno != EAGAIN) die("read");
+  }
+  return c;
+}
+
