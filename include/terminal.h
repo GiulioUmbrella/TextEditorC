@@ -12,3 +12,5 @@ void modifyScreen(ScreenOp op);
 void getWindowSize();
 void writeToScreen(char * str);
 
+int getSecreeRows();
+int getScreenCols();

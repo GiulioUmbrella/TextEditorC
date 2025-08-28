@@ -14,6 +14,15 @@ static struct termios origin_termios;
 int rows;
 int cols;
 
+int getSecreeRows() {
+  return rows;
+}
+
+int getScreenCols() {
+  return cols;
+}
+
+
 void die(const char *s) {
   perror(s);
   exit(1);
