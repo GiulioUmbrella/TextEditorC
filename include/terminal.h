@@ -10,4 +10,5 @@ void disableRawMode(void);
 void enableRawMode(void);
 void modifyScreen(ScreenOp op);
 void getWindowSize();
+void writeToScreen(char * str);
 

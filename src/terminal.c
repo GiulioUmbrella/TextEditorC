@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/ioctl.h>   // for TIOCGWINSZ, get windows size
 #include <termios.h>     // for terminal managemente
 #include <unistd.h>
@@ -56,6 +57,11 @@ void getWindowSize() {
   
   }
 }
+
+void writeToScreen(char * str) {
+  write(STDOUT_FILENO,str,strlen(str) );
+}
+
 void modifyScreen(ScreenOp op) {
   switch (op)
   {
