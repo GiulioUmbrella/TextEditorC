@@ -1,4 +1,3 @@
-#include "terminal.h"
 #include "controller.h"
 
 #ifdef EDITOR_DEMO
