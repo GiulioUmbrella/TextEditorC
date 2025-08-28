@@ -44,3 +44,8 @@ void editorRefreshScreen() {
 
   modifyScreen(SCR_CURSOR_TOP);
 }
+void initEditor() {
+  enableRawMode();
+  getWindowSize();
+  
+}
