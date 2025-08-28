@@ -3,11 +3,15 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <termios.h>
+#include <sys/ioctl.h>   // for TIOCGWINSZ, get windows size
+#include <termios.h>     // for terminal managemente
 #include <unistd.h>
 
 
 static struct termios origin_termios;
+
+int rows;
+int cols;
 
 void die(const char *s) {
   perror(s);
@@ -41,8 +45,17 @@ void enableRawMode() {
     
 }
 
+void getWindowSize() {
+  struct winsize ws;
 
-
+  if( ioctl(STDERR_FILENO, TIOCGWINSZ, &ws) == -1 || ws.ws_col == 0 ) {
+        die("windows size");
+  } else {
+    rows = ws.ws_row;
+    cols = ws.ws_col;    
+  
+  }
+}
 void modifyScreen(ScreenOp op) {
   switch (op)
   {

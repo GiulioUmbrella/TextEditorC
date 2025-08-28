@@ -9,4 +9,5 @@ void die(const char *s);
 void disableRawMode(void);
 void enableRawMode(void);
 void modifyScreen(ScreenOp op);
+void getWindowSize();
 
