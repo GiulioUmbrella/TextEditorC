@@ -29,11 +29,14 @@ void editorProcessKeypress(char c) {
   }
 
 void editorDrawRows() {
-  for (int y = 0; y < 24; y++)
+  for (int y = 0; y < 10; y++)
   {
-    write(STDOUT_FILENO, "~\r\n", 3);
+    writeToScreen("~\r\n");
   }
-  
+  for (int i = 0; i < 20; i++)
+  {
+    writeToScreen("_");
+  }
 }
 
 void editorRefreshScreen() {
