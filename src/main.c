@@ -19,7 +19,7 @@ int main() {
 
 #else
 int main() {
-  enableRawMode();
+  initEditor();
 
 	while (1) {
     editorRefreshScreen();
