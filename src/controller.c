@@ -21,8 +21,8 @@ void editorProcessKeypress(char c) {
 
   switch (c) {
     case CTRL_KEY('q'):
-      modifyScreen(SCR_CLEAN);
-      modifyScreen(SCR_CURSOR_TOP);
+      screenControl(SCR_CLEAN);
+      screenControl(SCR_CURSOR_TOP);
       exit(0);
       break;
     }
@@ -49,10 +49,12 @@ void editorDrawRows() {
 
 void editorRefreshScreen() {
   getWindowSize();
+  screenControl(SCR_CLEAN);
+  screenControl(SCR_CURSOR_TOP);
 
   editorDrawRows();
 
-  modifyScreen(SCR_CURSOR_TOP);
+  screenControl(SCR_CURSOR_TOP);
 }
 void initEditor() {
   enableRawMode();

@@ -85,7 +85,7 @@ void writeToScreen(char * str) {
   write(STDOUT_FILENO,str,strlen(str) );
 }
 
-void modifyScreen(ScreenOp op) {
+void screenControl(ScreenOp op) {
   switch (op)
   {
   case SCR_CLEAN:
