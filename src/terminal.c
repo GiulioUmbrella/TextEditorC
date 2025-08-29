@@ -66,6 +66,20 @@ void getWindowSize() {
   
   }
 }
+void getCursorPosition(char *buf) {
+  
+  unsigned int i = 0;
+  
+  write(STDOUT_FILENO, "\x1b[6n", 4);
+
+  while (i < 32) {
+    if (read(STDIN_FILENO, &buf[i], 1) != 1) break;
+    if (buf[i] == 'R') break;
+    i++;
+  }
+  buf[i] = '\0'; 
+
+}
 
 void writeToScreen(char * str) {
   write(STDOUT_FILENO,str,strlen(str) );

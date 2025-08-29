@@ -29,19 +29,26 @@ void editorProcessKeypress(char c) {
   }
 
 void editorDrawRows() {
-  for (int y = 0; y < 10; y++)
+  
+  for (int y = 0; y < getSecreeRows() - 2; y++)
   {
     writeToScreen("~\r\n");
   }
-  for (int i = 0; i < 20; i++)
+  for (int i = 0; i < getScreenCols(); i++)
   {
     writeToScreen("_");
   }
+  char buf1[100];
+  getCursorPosition(buf1);
+
+  char buffer[100];
+  sprintf(buffer, "Number of columns is %d, Number of rows %d cursor position %s",getScreenCols(), getSecreeRows(), buf1+2 );
+  writeToScreen(buffer);
+    
 }
 
 void editorRefreshScreen() {
-  modifyScreen(SCR_CLEAN);
-  modifyScreen(SCR_CURSOR_TOP);
+  getWindowSize();
 
   editorDrawRows();
 
