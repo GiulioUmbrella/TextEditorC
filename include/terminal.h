@@ -15,4 +15,7 @@ void writeToScreen(char * str);
 
 int getSecreeRows();
 int getScreenCols();
-void getCursorPosition(char *);
+int getCursorX();
+int getCursorY();
+
+int getCursorPosition();

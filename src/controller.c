@@ -38,17 +38,16 @@ void editorDrawRows() {
   {
     writeToScreen("_");
   }
-  char buf1[100];
-  getCursorPosition(buf1);
 
   char buffer[100];
-  sprintf(buffer, "Number of columns is %d, Number of rows %d cursor position %s",getScreenCols(), getSecreeRows(), buf1+2 );
+  sprintf(buffer, "Number of columns is %d, Number of rows %d cursor x %d cursor y %d",getScreenCols(), getSecreeRows(), getCursorX(), getCursorY() );
   writeToScreen(buffer);
     
 }
 
 void editorRefreshScreen() {
   getWindowSize();
+  getCursorPosition();
   screenControl(SCR_CLEAN);
   screenControl(SCR_CURSOR_TOP);
 

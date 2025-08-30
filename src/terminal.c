@@ -14,12 +14,23 @@ static struct termios origin_termios;
 int rows;
 int cols;
 
+int cx;
+int cy;
+
 int getSecreeRows() {
   return rows;
 }
 
 int getScreenCols() {
   return cols;
+}
+
+int getCursorX() {
+  return cx;
+}
+
+int getCursorY() {
+  return cy;
 }
 
 
@@ -66,8 +77,9 @@ void getWindowSize() {
   
   }
 }
-void getCursorPosition(char *buf) {
   
+int getCursorPosition() {
+  char buf[32];
   unsigned int i = 0;
   
   screenControl(SCR_QUERY_CURSOR);
@@ -78,7 +90,11 @@ void getCursorPosition(char *buf) {
     i++;
   }
   buf[i] = '\0'; 
+  
+  if(buf[0] != '\x1b' || buf[1] != '[' ) return -1;
+  if(sscanf(&buf[2],"%d,%d",&cx,&cy) != 2 ) return -1;
 
+  return 0;
 }
 
 void writeToScreen(char * str) {
