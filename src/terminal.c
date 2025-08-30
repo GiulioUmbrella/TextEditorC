@@ -70,7 +70,7 @@ void getCursorPosition(char *buf) {
   
   unsigned int i = 0;
   
-  write(STDOUT_FILENO, "\x1b[6n", 4);
+  screenControl(SCR_QUERY_CURSOR);
 
   while (i < 32) {
     if (read(STDIN_FILENO, &buf[i], 1) != 1) break;
@@ -95,6 +95,10 @@ void screenControl(ScreenOp op) {
   case SCR_CURSOR_TOP:
     write(STDOUT_FILENO, "\x1b[H", 3);
     break;  
+  
+  case SCR_QUERY_CURSOR:
+    write(STDOUT_FILENO, "\x1b[6n", 4);
+    break;
 
   default:
     break;
