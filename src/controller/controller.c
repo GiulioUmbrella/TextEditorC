@@ -1,5 +1,5 @@
 #include "controller.h"
-#include "terminal.h"
+#include "view_screen.h"
 
 #include <ctype.h>
 #include <stdio.h>
@@ -21,8 +21,8 @@ void editorProcessKeypress(char c) {
 
   switch (c) {
     case CTRL_KEY('q'):
-      screenControl(SCR_CLEAN);
-      screenControl(SCR_CURSOR_TOP);
+      screenClean();
+      MoveCursorTop();
       exit(0);
       break;
     }
@@ -46,17 +46,17 @@ void editorDrawRows() {
 }
 
 void editorRefreshScreen() {
-  getWindowSize();
-  getCursorPosition();
-  screenControl(SCR_CLEAN);
-  screenControl(SCR_CURSOR_TOP);
+  updateWindowSize();
+  updateCursorPosition();
+  
+  screenClean();
+  MoveCursorTop();
 
   editorDrawRows();
 
-  screenControl(SCR_CURSOR_TOP);
+  MoveCursorTop();
 }
+
 void initEditor() {
-  enableRawMode();
-  getWindowSize();
-  
-}
+    setScreen();
+  }

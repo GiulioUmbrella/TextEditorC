@@ -1,9 +1,8 @@
-#include "terminal.h"
+#include "view_terminal.h"
 
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include <sys/ioctl.h>   // for TIOCGWINSZ, get windows size
 #include <termios.h>     // for terminal managemente
 #include <unistd.h>
@@ -11,26 +10,10 @@
 
 static struct termios origin_termios;
 
-int rows;
-int cols;
+static settings screenSetting;
 
-int cx;
-int cy;
-
-int getSecreeRows() {
-  return rows;
-}
-
-int getScreenCols() {
-  return cols;
-}
-
-int getCursorX() {
-  return cx;
-}
-
-int getCursorY() {
-  return cy;
+const settings* getSettings() {
+  return &screenSetting;
 }
 
 
@@ -66,40 +49,6 @@ void enableRawMode() {
     
 }
 
-void getWindowSize() {
-  struct winsize ws;
-
-  if( ioctl(STDERR_FILENO, TIOCGWINSZ, &ws) == -1 || ws.ws_col == 0 ) {
-        die("windows size");
-  } else {
-    rows = ws.ws_row;
-    cols = ws.ws_col;    
-  
-  }
-}
-  
-int getCursorPosition() {
-  char buf[32];
-  unsigned int i = 0;
-  
-  screenControl(SCR_QUERY_CURSOR);
-
-  while (i < 32) {
-    if (read(STDIN_FILENO, &buf[i], 1) != 1) break;
-    if (buf[i] == 'R') break;
-    i++;
-  }
-  buf[i] = '\0'; 
-  
-  if(buf[0] != '\x1b' || buf[1] != '[' ) return -1;
-  if(sscanf(&buf[2],"%d,%d",&cx,&cy) != 2 ) return -1;
-
-  return 0;
-}
-
-void writeToScreen(char * str) {
-  write(STDOUT_FILENO,str,strlen(str) );
-}
 
 void screenControl(ScreenOp op) {
   switch (op)
@@ -121,4 +70,36 @@ void screenControl(ScreenOp op) {
   }
 }
 
+
+
+void getWindowSize() {
+  struct winsize ws;
+
+  if( ioctl(STDERR_FILENO, TIOCGWINSZ, &ws) == -1 || ws.ws_col == 0 ) {
+        die("windows size");
+  } else {
+    screenSetting.rows = ws.ws_row;
+    screenSetting.cols = ws.ws_col;    
   
+  }
+}
+  
+int getCursorPosition() {
+  char buf[32];
+  unsigned int i = 0;
+  
+  screenControl(SCR_QUERY_CURSOR);
+
+  while (i < 32) {
+    if (read(STDIN_FILENO, &buf[i], 1) != 1) break;
+    if (buf[i] == 'R') break;
+    i++;
+  }
+  buf[i] = '\0'; 
+  
+  if(buf[0] != '\x1b' || buf[1] != '[' ) return -1;
+  if(sscanf(&buf[2],"%d,%d",&screenSetting.cx,&screenSetting.cy) != 2 ) return -1;
+
+  return 0;
+}
+
