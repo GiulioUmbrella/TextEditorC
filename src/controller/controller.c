@@ -38,6 +38,9 @@ void editorRefreshScreen() {
   editorDrawRows();
 
   MoveCursorTop();
+
+  char c = editorReadKey();
+  editorProcessKeypress(c);
 }
 
 void initEditor() {
