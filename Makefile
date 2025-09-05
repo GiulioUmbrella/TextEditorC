@@ -7,7 +7,7 @@ CC=gcc
 INCLUDE_DIRS= $(HEADERS_DIR) $(wildcard $(HEADERS_DIR)/*/)
 BUILD_INCLUDE_DIRS := $(patsubst $(HEADERS_DIR)%,$(BUILD_DIR)%,$(INCLUDE_DIRS))
 
-FLAGS=-Wall -Wextra -g $(addprefix -I,$(INCLUDE_DIRS)) -MMD -MP
+FLAGS= -std=c17 -Wall -Wextra -g $(addprefix -I,$(INCLUDE_DIRS)) -MMD -MP
 
 SOURCES=$(wildcard $(SRC_DIR)/*.c $(SRC_DIR)/*/*.c)
 OBJECTS=$(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SOURCES))
