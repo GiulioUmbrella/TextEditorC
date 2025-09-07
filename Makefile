@@ -13,6 +13,25 @@ SOURCES=$(wildcard $(SRC_DIR)/*.c $(SRC_DIR)/*/*.c)
 OBJECTS=$(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SOURCES))
 DEPS   =$(OBJECTS:.o=.d )
 
+BUILD ?= debug
+
+FLAGS_DEBUG = -g -Wall -Wextra -Wpedantic \
+              -Wshadow -Wconversion -Wsign-conversion 
+
+FLAGS_RELEASE = -Wall -Wextra -Wpedantic -Werror \
+                -Wshadow -Wconversion -Wsign-conversion \
+                -Wformat=2 -Wnull-dereference -O2
+
+ifeq ($(BUILD),release)
+    FLAGS = $(FLAGS_RELEASE)
+else
+    FLAGS = $(FLAGS_DEBUG)
+endif
+
+FLAGS += $(addprefix -I,$(INCLUDE_DIRS)) -MMD -MP
+
+
+
 BINARY=kilo
 
 all: $(BINARY)
