@@ -5,8 +5,8 @@ void die(const char *s);
 void disableRawMode(void);
 void enableRawMode(void);
 
-void getWindowSize();
-int getCursorPosition();
+void getWindowSize(void);
+int getCursorPosition(void);
 
 typedef enum {
   SCR_CLEAN,       // clean entire screen
@@ -25,6 +25,6 @@ typedef struct
 
 } settings;
 
-const settings* getSettings();
+const settings* getSettings(void);
 
 

@@ -1,4 +1,4 @@
 #pragma once
 
-char editorReadKey();
+char editorReadKey(void);
 void editorProcessKeypress(char c);

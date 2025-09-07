@@ -3,15 +3,15 @@
 
 void writeToScreen(char * str);
 
-int getSecreeRows();
-int getScreenCols();
-int getCursorX();
-int getCursorY();
+int getSecreeRows(void);
+int getScreenCols(void);
+int getCursorX(void);
+int getCursorY(void);
 
-void updateWindowSize();
-void updateCursorPosition();
+void updateWindowSize(void);
+void updateCursorPosition(void);
 
-void screenClean();
-void MoveCursorTop();
+void screenClean(void);
+void MoveCursorTop(void);
 
-void setScreen();
+void setScreen(void);

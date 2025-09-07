@@ -1,8 +1,8 @@
 #pragma once
 
-void editorRefreshScreen();
-void editorDrawRows();
-void initEditor();
+void editorRefreshScreen(void);
+void editorDrawRows(void);
+void initEditor(void);
 
 typedef struct {
   char *b;
