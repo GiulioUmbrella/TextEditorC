@@ -12,7 +12,7 @@ static struct termios origin_termios;
 
 static settings screenSetting;
 
-const settings* getSettings() {
+const settings* getSettings(void) {
   return &screenSetting;
 }
 
@@ -27,7 +27,7 @@ void disableRawMode(void) {
         die("tcsetattr");
 }
 
-void enableRawMode() {
+void enableRawMode(void) {
     if(tcgetattr(STDIN_FILENO, &origin_termios) == -1)
         die("tcgetattr");
 
@@ -72,7 +72,7 @@ void screenControl(ScreenOp op) {
 
 
 
-void getWindowSize() {
+void getWindowSize(void) {
   struct winsize ws;
 
   if( ioctl(STDERR_FILENO, TIOCGWINSZ, &ws) == -1 || ws.ws_col == 0 ) {
@@ -84,7 +84,7 @@ void getWindowSize() {
   }
 }
   
-int getCursorPosition() {
+int getCursorPosition(void) {
   char buf[32];
   unsigned int i = 0;
   
