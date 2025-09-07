@@ -17,7 +17,7 @@ int main() {
 }
 
 #else
-int main() {
+int main(void) {
   initEditor();
 
 	while (1) {
