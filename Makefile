@@ -2,7 +2,7 @@ SRC_DIR=src
 BUILD_DIR=build
 HEADERS_DIR=include
 
-CC=gcc
+CC=clang
 
 INCLUDE_DIRS= $(HEADERS_DIR) $(wildcard $(HEADERS_DIR)/*/)
 BUILD_INCLUDE_DIRS := $(patsubst $(HEADERS_DIR)%,$(BUILD_DIR)%,$(INCLUDE_DIRS))
