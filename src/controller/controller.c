@@ -10,7 +10,7 @@
 
 
 
-void editorDrawRows() {
+void editorDrawRows(void) {
   
   for (int y = 0; y < getSecreeRows() - 2; y++)
   {
@@ -27,7 +27,7 @@ void editorDrawRows() {
     
 }
 
-void editorRefreshScreen() {
+void editorRefreshScreen(void) {
   updateWindowSize();
   updateCursorPosition();
   
@@ -42,6 +42,6 @@ void editorRefreshScreen() {
   editorProcessKeypress(c);
 }
 
-void initEditor() {
+void initEditor(void) {
     setScreen();
   }

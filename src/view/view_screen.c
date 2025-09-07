@@ -8,39 +8,39 @@ void writeToScreen(char * str) {
   write(STDOUT_FILENO,str,strlen(str) );
 }
  
-int getSecreeRows(){
+int getSecreeRows(void){
     return getSettings()->rows;
 }
 
-int getScreenCols(){
+int getScreenCols(void){
     return getSettings()->cols;
 }
 
-int getCursorX(){
+int getCursorX(void){
     return getSettings()->cx;
 }
 
-int getCursorY(){
+int getCursorY(void){
     return getSettings()->cy;
 }
 
 
-void updateWindowSize(){
+void updateWindowSize(void){
     getWindowSize();
 }
-void updateCursorPosition(){
+void updateCursorPosition(void){
     getCursorPosition();
 }
 
-void screenClean(){
+void screenClean(void){
     screenControl(SCR_CLEAN);
 }
 
-void MoveCursorTop(){
+void MoveCursorTop(void){
     screenControl(SCR_CURSOR_TOP);
 }
 
-void setScreen(){
+void setScreen(void){
     enableRawMode();
     getWindowSize();
 }
